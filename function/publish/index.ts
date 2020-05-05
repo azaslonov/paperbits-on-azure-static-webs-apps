@@ -27,13 +27,13 @@ export async function publish(): Promise<void> {
     injector.bindModule(new ProseMirrorModule());
     injector.bindModule(new IntercomPublishModule());
     injector.bindModule(new GoogleTagManagerPublishModule());
-    injector.bindInstance("logger", new LogService("a200340d-6b82-494d-9dbf-687ba6e33f9e"));
 
     /* Initializing Demo module */
     const outputBasePath = "./dist/website";
     const settingsPath = "./dist/publisher/config.json";
     const dataPath = "./dist/publisher/data/demo.json";
     injector.bindModule(new DemoPublishModule(dataPath, settingsPath, outputBasePath));
+    injector.bindInstance("logger", new LogService("3b6f6067-9409-4895-9023-b3193fad1847"));
 
     /* Uncomment to enable Firebase module */
     // injector.bindModule(new FirebaseModule());

@@ -5,7 +5,11 @@ import * as AppInsights from "applicationinsights";
 
 export class LogService implements Logger {
     constructor(private readonly instrumentationKey: string) {
-        AppInsights.setup(this.instrumentationKey).start();
+        console.log("Setting up AppInsights...");
+        console.log(this.instrumentationKey);
+        AppInsights.setup(this.instrumentationKey);
+        AppInsights.start();
+        console.log("AppInsights ready.");
     }
 
     public async traceSession(): Promise<void> {
@@ -13,6 +17,7 @@ export class LogService implements Logger {
     }
 
     public async traceEvent(eventName: string, properties?: Bag<string>, measurments?: Bag<number>): Promise<void> {
+        console.log("Event: " + eventName);
         AppInsights.defaultClient.trackEvent({ name: eventName, properties: properties, measurements: measurments });
     }
 
