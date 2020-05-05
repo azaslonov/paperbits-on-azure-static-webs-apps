@@ -70,7 +70,7 @@ const functionConfig = {
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({ filename: "[name].css", chunkFilename: "[id].css" }),
         new CopyWebpackPlugin([
-            { from: `./examples/function`, to: `./` },
+            { from: `./function`, to: `./` },
             { from: `./src/config.publish.json`, to: `./publish/config.json` },
             { from: `./src/themes/website/styles/fonts`, to: "publish/assets/styles/fonts" }
         ]),
