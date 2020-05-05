@@ -12,6 +12,7 @@
         "start": "webpack-dev-server --open --config webpack.develop.js && webpack --config webpack.runtime.js",
         "build-designer": "webpack --config webpack.build.js",
         "build-publisher": "webpack --config webpack.publisher.js",
+        "build-function": "webpack --config webpack.function.js",
         "publish": "webpack --config webpack.publisher.js && node dist/publisher/index.js",
         "postinstall": "npm rebuild node-sass"
     },
