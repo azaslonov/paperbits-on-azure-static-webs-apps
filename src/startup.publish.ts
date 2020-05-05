@@ -18,6 +18,7 @@ import { ProseMirrorModule } from "@paperbits/prosemirror/prosemirror.module";
 import { IntercomPublishModule } from "@paperbits/intercom/intercom.publish.module";
 import { GoogleTagManagerPublishModule } from "@paperbits/gtm/gtm.publish.module";
 import { DemoPublishModule } from "./components/demo.publish.module";
+import { LogService } from "../function/publish/appInsightsLogger";
 
 /* Uncomment to enable Firebase module */
 // import { FirebaseModule } from "@paperbits/firebase/firebase.admin.module";
@@ -39,6 +40,7 @@ const outputBasePath = "./dist/website";
 const settingsPath = "./dist/publisher/config.json";
 const dataPath = "./dist/publisher/data/demo.json";
 injector.bindModule(new DemoPublishModule(dataPath, settingsPath, outputBasePath));
+injector.bindInstance("logger", new LogService("a200340d-6b82-494d-9dbf-687ba6e33f9e"));
 
 /* Uncomment to enable Firebase module */
 // injector.bindModule(new FirebaseModule());

@@ -10,7 +10,7 @@ import { ProseMirrorModule } from "@paperbits/prosemirror/prosemirror.module";
 import { IntercomPublishModule } from "@paperbits/intercom/intercom.publish.module";
 import { GoogleTagManagerPublishModule } from "@paperbits/gtm/gtm.publish.module";
 import { DemoPublishModule } from "../../src/components/demo.publish.module";
-import { LogService } from "@paperbits/azure/appInsightsLogger"
+import { LogService } from "./appInsightsLogger"
 
 export async function publish(): Promise<void> {
     /* Uncomment to enable Firebase module */

@@ -57,6 +57,8 @@
         "@paperbits/styles": "0.1.269",
         "@types/knockout.mapping": "^2.0.35",
         "@webcomponents/custom-elements": "^1.4.0",
+        "applicationinsights": "^1.7.5",
+        "applicationinsights-js": "^1.0.21",
         "basiclightbox": "^5.0.3",
         "core-js": "^3.6.4",
         "cssom": "^0.4.4",
