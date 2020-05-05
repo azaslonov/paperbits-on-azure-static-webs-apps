@@ -14,6 +14,7 @@
         "build-publisher": "webpack --config webpack.publisher.js",
         "build-function": "webpack --config webpack.function.js",
         "publish": "webpack --config webpack.publisher.js && node dist/publisher/index.js",
+        "publish-with-function": "node disy/api/publish/index.js",
         "postinstall": "npm rebuild node-sass"
     },
     "devDependencies": {
@@ -44,6 +45,7 @@
         "webpack-merge": "^4.2.2"
     },
     "dependencies": {
+        "@paperbits/azure": "^0.1.269",
         "@paperbits/common": "0.1.269",
         "@paperbits/core": "0.1.269",
         "@paperbits/emails": "0.1.269",

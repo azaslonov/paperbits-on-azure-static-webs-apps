@@ -10,7 +10,7 @@ import { ProseMirrorModule } from "@paperbits/prosemirror/prosemirror.module";
 import { IntercomPublishModule } from "@paperbits/intercom/intercom.publish.module";
 import { GoogleTagManagerPublishModule } from "@paperbits/gtm/gtm.publish.module";
 import { DemoPublishModule } from "../../src/components/demo.publish.module";
-
+import { LogService } from "@paperbits/azure/appInsightsLogger"
 
 export async function publish(): Promise<void> {
     /* Uncomment to enable Firebase module */
@@ -27,6 +27,7 @@ export async function publish(): Promise<void> {
     injector.bindModule(new ProseMirrorModule());
     injector.bindModule(new IntercomPublishModule());
     injector.bindModule(new GoogleTagManagerPublishModule());
+    injector.bindInstance("logger", new LogService("a200340d-6b82-494d-9dbf-687ba6e33f9e"));
 
     /* Initializing Demo module */
     const outputBasePath = "./dist/website";
@@ -53,13 +54,6 @@ export async function publish(): Promise<void> {
             process.exit();
         });
 }
-
-
-
-
-
-
-
 
 
 export async function run(context, req): Promise<void> {
