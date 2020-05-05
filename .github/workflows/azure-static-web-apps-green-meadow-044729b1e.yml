@@ -22,6 +22,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm run build-designer
+    - run: npm run build-function
     - name: Build And Deploy
       id: builddeploy
       uses: Azure/static-web-apps-deploy@master
