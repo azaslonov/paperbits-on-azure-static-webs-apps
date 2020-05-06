@@ -12,6 +12,8 @@ import { GoogleTagManagerPublishModule } from "@paperbits/gtm/gtm.publish.module
 import { DemoPublishModule } from "../../src/components/demo.publish.module";
 import { LogService } from "./appInsightsLogger"
 
+const logger = new LogService("20ab0212-1608-429d-bed0-d74ff05ed444");
+
 export async function publish(): Promise<void> {
     /* Uncomment to enable Firebase module */
     // import { FirebaseModule } from "@paperbits/firebase/firebase.admin.module";
@@ -33,7 +35,7 @@ export async function publish(): Promise<void> {
     const settingsPath = "./dist/publisher/config.json";
     const dataPath = "./dist/publisher/data/demo.json";
     injector.bindModule(new DemoPublishModule(dataPath, settingsPath, outputBasePath));
-    injector.bindInstance("logger", new LogService("20ab0212-1608-429d-bed0-d74ff05ed444"));
+    injector.bindInstance("logger", logger);
 
     /* Uncomment to enable Firebase module */
     // injector.bindModule(new FirebaseModule());
@@ -47,20 +49,22 @@ export async function publish(): Promise<void> {
     publisher.publish()
         .then(() => {
             console.log("DONE.");
+            logger.traceEvent("DONE.");
             process.exit();
         })
         .catch((error) => {
             console.log(error);
+            logger.traceError(error);
             process.exit();
         });
 }
-
 
 export async function run(context, req): Promise<void> {
     try {
         context.log("Publishing website...");
         await publish();
         context.log("Done.");
+        logger.traceEvent("DONE.");
 
         context.res = {
             status: 200,
@@ -69,6 +73,7 @@ export async function run(context, req): Promise<void> {
     }
     catch (error) {
         context.log.error(error);
+        logger.traceError(error);
 
         context.res = {
             status: 500,
