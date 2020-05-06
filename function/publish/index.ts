@@ -12,7 +12,7 @@ import { GoogleTagManagerPublishModule } from "@paperbits/gtm/gtm.publish.module
 import { DemoPublishModule } from "../../src/components/demo.publish.module";
 import { LogService } from "./appInsightsLogger"
 
-const logger = new LogService("20ab0212-1608-429d-bed0-d74ff05ed444");
+const logger = new LogService("InstrumentationKey=20ab0212-1608-429d-bed0-d74ff05ed444");
 
 export async function publish(): Promise<void> {
     /* Uncomment to enable Firebase module */
