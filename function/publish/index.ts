@@ -55,12 +55,12 @@ export async function run(context, req): Promise<void> {
     try {
         context.log("Publishing website...");
         await publish();
-        context.log("Done.");
-        logger.traceEvent("DONE.");
+        context.log(`DONE. ${(new Date()).toISOString()}`);
+        logger.traceEvent(`DONE. ${(new Date()).toISOString()}`);
 
         context.res = {
             status: 200,
-            body: "Done."
+            body: `DONE. ${(new Date()).toISOString()}`
         };
     }
     catch (error) {
