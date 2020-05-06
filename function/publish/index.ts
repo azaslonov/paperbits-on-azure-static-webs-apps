@@ -46,17 +46,15 @@ export async function publish(): Promise<void> {
     const publisher = injector.resolve<IPublisher>("sitePublisher");
 
     /* Running actual publishing */
-    publisher.publish()
-        .then(() => {
-            console.log("DONE.");
-            logger.traceEvent("DONE.");
-            process.exit();
-        })
-        .catch((error) => {
-            console.log(error);
-            logger.traceError(error);
-            process.exit();
-        });
+    try {
+        await publisher.publish()
+        console.log("DONE.");
+        logger.traceEvent("DONE.");
+    }
+    catch (error) {
+        console.log(error);
+        logger.traceError(error);
+    }
 }
 
 export async function run(context, req): Promise<void> {
