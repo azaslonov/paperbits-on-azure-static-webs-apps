@@ -72,7 +72,8 @@ const functionConfig = {
         new CopyWebpackPlugin([
             { from: `./function`, to: `./` },
             { from: `./src/config.publish.json`, to: `./publish/config.json` },
-            { from: `./src/themes/website/styles/fonts`, to: "publish/assets/styles/fonts" }
+            { from: `./src/themes/website/styles/fonts`, to: "publish/assets/styles/fonts" },
+            { from: `./src/data`, to: "publish/data" }
         ]),
         new webpack.DefinePlugin({
             "process.env.NODE_ENV": JSON.stringify("production")
