@@ -21,11 +21,7 @@ import { ClickCounterEditorModule } from "./click-counter/ko";
 
 
 export class DemoPublishModule implements IInjectorModule {
-    constructor(
-        private readonly dataPath: string,
-        private readonly settingsPath: string,
-        private readonly outputBasePath: string
-    ) { }
+    constructor(private readonly dataPath: string) { }
 
     public register(injector: IInjector): void {
         injector.bindSingleton("logger", ConsoleLogger);
@@ -34,8 +30,6 @@ export class DemoPublishModule implements IInjectorModule {
         injector.bindSingleton("router", StaticRouter);
         injector.bindSingleton("blobStorage", StaticBlobStorage);
         injector.bindInstance("objectStorage", new StaticLocalObjectStorage(path.resolve(this.dataPath)));
-        injector.bindInstance("settingsProvider", new StaticSettingsProvider(path.resolve(this.settingsPath)));
-        injector.bindInstance("outputBlobStorage", new FileSystemBlobStorage(path.resolve(this.outputBasePath)));
         injector.bindModule(new SearchPublishModule());
         injector.bindModule(new ClickCounterEditorModule());
     }

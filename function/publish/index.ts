@@ -1,3 +1,4 @@
+import { AzureBlobStorage } from "@paperbits/azure";
 import * as path from "path";
 import * as fs from "fs";
 import { InversifyInjector } from "@paperbits/common/injection";
@@ -13,6 +14,7 @@ import { IntercomPublishModule } from "@paperbits/intercom/intercom.publish.modu
 import { GoogleTagManagerPublishModule } from "@paperbits/gtm/gtm.publish.module";
 import { DemoPublishModule } from "../../src/components/demo.publish.module";
 import { LogService } from "./appInsightsLogger"
+import { StaticSettingsProvider } from "../../src/components/staticSettingsProvider";
 
 const logger = new LogService("InstrumentationKey=20ab0212-1608-429d-bed0-d74ff05ed444");
 
@@ -33,15 +35,27 @@ export async function publish(): Promise<void> {
     injector.bindModule(new GoogleTagManagerPublishModule());
 
     /* Initializing Demo module */
-    const outputBasePath = "./dist/website";
-    const settingsPath = path.resolve(__dirname, "./config.json");
     const dataPath = path.resolve(__dirname, "./data/demo.json");
-    injector.bindModule(new DemoPublishModule(dataPath, settingsPath, outputBasePath));
+    injector.bindModule(new DemoPublishModule(dataPath));
     injector.bindInstance("logger", logger);
 
-    /* Uncomment to enable Firebase module */
-    // injector.bindModule(new FirebaseModule());
+    const configFile = path.resolve(__dirname, "./config.json");
+    const configuration = JSON.parse(fs.readFileSync(configFile, "utf8").toString());
 
+    const settingsProvider = new StaticSettingsProvider({
+        dataPath: path.resolve(__dirname, "./data/demo.json")
+    });
+
+    const outputSettingsProvider = new StaticSettingsProvider({
+        blobStorageContainer: configuration.outputBlobStorageContainer,
+        blobStorageConnectionString: configuration.outputBlobStorageConnectionString
+    });
+
+    /* Storage where the website get published */
+    const outputBlobStorage = new AzureBlobStorage(outputSettingsProvider);
+
+    injector.bindInstance("settingsProvider", settingsProvider);
+    injector.bindInstance("outputBlobStorage", outputBlobStorage);
     injector.resolve("autostart");
 
     /* Building dependency injection container */
