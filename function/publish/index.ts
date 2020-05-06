@@ -1,3 +1,5 @@
+import * as path from "path";
+import * as fs from "fs";
 import { InversifyInjector } from "@paperbits/common/injection";
 import { IPublisher } from "@paperbits/common/publishing";
 import { FormsModule } from "@paperbits/forms/forms.module";
@@ -32,8 +34,8 @@ export async function publish(): Promise<void> {
 
     /* Initializing Demo module */
     const outputBasePath = "./dist/website";
-    const settingsPath = "./dist/publisher/config.json";
-    const dataPath = "./dist/publisher/data/demo.json";
+    const settingsPath = path.resolve(__dirname, "./config.json");
+    const dataPath = path.resolve(__dirname, "./data/demo.jsonn");
     injector.bindModule(new DemoPublishModule(dataPath, settingsPath, outputBasePath));
     injector.bindInstance("logger", logger);
 
