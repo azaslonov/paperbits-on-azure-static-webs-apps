@@ -3,7 +3,7 @@
         "permalinkBaseUrl": "https://paperbits.io",
         "mediaBaseUrl": "https://cdn.paperbits.io"
     },
-    "blobStorageContainer": "$web",
-    "blobStorageConnectionString": "DefaultEndpointsProtocol=https;AccountName=alzaslonstaticwebsite;AccountKey=BBJp7P+pXuWuVnuNd50rKeiSwVcYL2mEMk1XMKEkpvIQF9BWd88vEblKcQnUp4+wnLmpVt9g0rbMumFbkYQ0NA==;EndpointSuffix=core.windows.net",
+    "outputBlobStorageContainer": "$web",
+    "outputBlobStorageConnectionString": "DefaultEndpointsProtocol=https;AccountName=alzaslonstaticwebsite;AccountKey=BBJp7P+pXuWuVnuNd50rKeiSwVcYL2mEMk1XMKEkpvIQF9BWd88vEblKcQnUp4+wnLmpVt9g0rbMumFbkYQ0NA==;EndpointSuffix=core.windows.net",
     "environment": "publish"
 }
