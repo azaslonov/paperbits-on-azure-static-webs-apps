@@ -46,15 +46,9 @@ export async function publish(): Promise<void> {
     const publisher = injector.resolve<IPublisher>("sitePublisher");
 
     /* Running actual publishing */
-    try {
-        await publisher.publish()
-        console.log("DONE.");
-        logger.traceEvent("DONE.");
-    }
-    catch (error) {
-        console.log(error);
-        logger.traceError(error);
-    }
+    await publisher.publish()
+    console.log(`DONE. ${(new Date()).toISOString()}`);
+    logger.traceEvent(`DONE. ${(new Date()).toISOString()}`);
 }
 
 export async function run(context, req): Promise<void> {
