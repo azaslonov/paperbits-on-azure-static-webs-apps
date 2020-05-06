@@ -40,7 +40,7 @@ const outputBasePath = "./dist/website";
 const settingsPath = "./dist/publisher/config.json";
 const dataPath = "./dist/publisher/data/demo.json";
 injector.bindModule(new DemoPublishModule(dataPath, settingsPath, outputBasePath));
-injector.bindInstance("logger", new LogService("20ab0212-1608-429d-bed0-d74ff05ed444"));
+injector.bindInstance("logger", new LogService("InstrumentationKey=20ab0212-1608-429d-bed0-d74ff05ed444"));
 
 /* Uncomment to enable Firebase module */
 // injector.bindModule(new FirebaseModule());

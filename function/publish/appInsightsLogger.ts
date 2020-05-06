@@ -4,12 +4,11 @@ import * as AppInsights from "applicationinsights";
 
 
 export class LogService implements Logger {
+    private client: AppInsights.TelemetryClient;
+
     constructor(private readonly instrumentationKey: string) {
-        console.log("Setting up AppInsights...");
-        console.log(this.instrumentationKey);
-        AppInsights.setup(this.instrumentationKey);
         AppInsights.start();
-        console.log("AppInsights ready.");
+        this.client = new AppInsights.TelemetryClient(this.instrumentationKey);
     }
 
     public async traceSession(): Promise<void> {
@@ -18,14 +17,17 @@ export class LogService implements Logger {
 
     public async traceEvent(eventName: string, properties?: Bag<string>, measurments?: Bag<number>): Promise<void> {
         console.log("Event: " + eventName);
-        AppInsights.defaultClient.trackEvent({ name: eventName, properties: properties, measurements: measurments });
+        this.client.trackEvent({ name: eventName, properties: properties, measurements: measurments });
+        this.client.flush();
     }
 
     public async traceError(error: Error, handledAt?: string): Promise<void> {
-        AppInsights.defaultClient.trackException({ exception: error });
+        this.client.trackException({ exception: error });
+        this.client.flush();
     }
 
     public async traceView(name: string): Promise<void> {
-        AppInsights.defaultClient.trackPageView({ name: name });
+        this.client.trackPageView({ name: name });
+        this.client.flush();
     }
 }
