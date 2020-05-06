@@ -35,7 +35,7 @@ export async function publish(): Promise<void> {
     /* Initializing Demo module */
     const outputBasePath = "./dist/website";
     const settingsPath = path.resolve(__dirname, "./config.json");
-    const dataPath = path.resolve(__dirname, "./data/demo.jsonn");
+    const dataPath = path.resolve(__dirname, "./data/demo.json");
     injector.bindModule(new DemoPublishModule(dataPath, settingsPath, outputBasePath));
     injector.bindInstance("logger", logger);
 
