@@ -36,4 +36,5 @@ injector.resolve("autostart");
 
 document.addEventListener("DOMContentLoaded", () => {
     setImmediate(() => ko.applyBindings(undefined, document.body));
+    console.log("TEST");
 });
